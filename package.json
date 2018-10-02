@@ -1,0 +1,9 @@
+{
+  "name": "ranglin",
+  "version": "0.0.1",
+  "description": "An agent agnostic task manager that can manage and provide detail status on repeatable singleton tasks",
+  "main": "dist/index.js",
+  "repository": "https://github.com/xlhybridsOSS/ranglin",
+  "license": "MIT",
+  "private": false
+}
