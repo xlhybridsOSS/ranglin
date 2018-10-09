@@ -7,6 +7,7 @@ import server from './server';
 
 getConnectionOptions()
   .then((options: ConnectionOptions) => {
+    // FIXME: Need more flexible/secure credentials provider rather than env vars.
     Object.assign(options, {
       database: process.env.POSTGRES_DB,
       password: process.env.POSTGRES_PASSWORD,
@@ -15,4 +16,6 @@ getConnectionOptions()
     return createConnection(options);
   })
   .then(() => server.listen(3000))
-  .then(() => console.log('server started'));
+  // FIXME: Better logging solution.
+  .then(() => console.log('server started'))
+  .catch(err => console.error('Server failed to start', err));

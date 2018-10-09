@@ -20,23 +20,25 @@ export default (ctx: Context) =>
       .limit(1)
       .getOne();
 
-    if (task) {
-      await entityManager
-        .createQueryBuilder()
-        .relation(Task, 'activeExecution')
-        .of(task)
-        .set(task.nextExecution);
-      await entityManager
-        .createQueryBuilder()
-        .relation(Task, 'nextExecution')
-        .of(task)
-        .set(null);
+    if (!task) {
+      ctx.status = 404;
+      return;
     }
 
-    if (task) {
-      ctx.status = 200;
-      ctx.response.body = task.path;
-    } else {
-      ctx.status = 404;
-    }
+    await entityManager
+      .createQueryBuilder()
+      .relation(Task, 'activeExecution')
+      .of(task)
+      .set(task.nextExecution);
+    await entityManager
+      .createQueryBuilder()
+      .relation(Task, 'nextExecution')
+      .of(task)
+      .set(null);
+
+    // TODO: update status timestamps on executions
+    ctx.status = 200;
+
+    // TODO: need to return what is needed to execute the task.
+    ctx.response.body = task.path;
   });

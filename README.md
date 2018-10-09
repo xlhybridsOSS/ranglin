@@ -1,6 +1,7 @@
 # Ranglin
 
 ## Testing
+```
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"task": "sample/task1/get-version"}' \
@@ -20,4 +21,4 @@ curl --header "Content-Type: application/json" \
   --request PUT \
   --data '{"taskPath": "sample/task1/"}' \
   http://localhost:3000/start-next-task
-
+```

@@ -13,7 +13,8 @@ export enum TaskExecutionStatus {
   Pending,
   Started,
   Done,
-  Cancelled
+  Cancelled,
+  Failed
 }
 
 @Entity()
@@ -34,7 +35,7 @@ export class TaskExecution {
   public startedAt: Date;
 
   @Column({ type: 'timestamptz', nullable: true })
-  public updatedAd: Date;
+  public updatedAt: Date;
 
   @Column({ type: 'timestamptz', nullable: true })
   public doneAt: Date;
