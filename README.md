@@ -20,5 +20,5 @@ curl --header "Content-Type: application/json" \
 curl --header "Content-Type: application/json" \
   --request PUT \
   --data '{"taskPath": "sample/task1/"}' \
-  http://localhost:3000/start-next-task
+  http://localhost:3000/claim-next-task
 ```

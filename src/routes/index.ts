@@ -1,6 +1,6 @@
 import Router from 'koa-router';
+import claimNextTask from './claim-next-task';
 import createRequest from './create-request';
-import getNextTask from './get-next-task';
 
 const router = new Router();
 
@@ -9,6 +9,6 @@ router.get('/*', async ctx => {
 });
 
 router.post('/request', createRequest);
-router.put('/start-next-task', getNextTask);
+router.put('/claim-next-task', claimNextTask);
 
 export default router;
