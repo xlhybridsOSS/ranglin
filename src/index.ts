@@ -5,17 +5,19 @@ import {
 } from 'typeorm';
 import server from './server';
 
-getConnectionOptions()
-  .then((options: ConnectionOptions) => {
+(async () => {
+  try {
+    const options = await getConnectionOptions();
     // FIXME: Need more flexible/secure credentials provider rather than env vars.
     Object.assign(options, {
       database: process.env.POSTGRES_DB,
       password: process.env.POSTGRES_PASSWORD,
       username: process.env.POSTGRES_USER
     });
-    return createConnection(options);
-  })
-  .then(() => server.listen(3000))
-  // FIXME: Better logging solution.
-  .then(() => console.log('server started'))
-  .catch(err => console.error('Server failed to start', err));
+    await createConnection(options);
+    server.listen(process.env.SVC_PORT);
+    console.log('server listening on port %s', process.env.SVC_PORT);
+  } catch (err) {
+    console.error('Server failed to start', err);
+  }
+})();
